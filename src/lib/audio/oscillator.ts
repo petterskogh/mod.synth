@@ -1,11 +1,9 @@
-import type { OscillatorOptions } from '../types';
-
 export class Oscillator {
   private readonly _context: AudioContext;
   private readonly _output: AudioNode;
   private _oscillator: OscillatorNode;
 
-  constructor(context: AudioContext, output: AudioNode, options: OscillatorOptions = {}) {
+  constructor(context: AudioContext, output: AudioNode, options: Audio.OscillatorOptions) {
     this._context = context;
     this._output = output;
     this._oscillator = this.createOscillator(options);
@@ -45,7 +43,7 @@ export class Oscillator {
     this._oscillator.disconnect();
   }
 
-  private createOscillator({ frequency = 440, waveForm = 'sine', delay = 0 }: OscillatorOptions): OscillatorNode {
+  private createOscillator({ frequency = 440, waveForm = 'sine', delay = 0 }: Audio.OscillatorOptions): OscillatorNode {
     const oscillator = this._context.createOscillator();
     oscillator.frequency.setValueAtTime(frequency, delay);
     oscillator.type = waveForm;
